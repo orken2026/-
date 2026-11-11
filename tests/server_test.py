@@ -125,7 +125,7 @@ def main():
         code, body, hdr = http(base + '/')
         assert code == 200 and b'QAZAQ PDD' in body and 'text/html' in hdr['Content-Type']
         assert http(base + '/app.js')[0] == 200
-        code, body, hdr = http(base + '/assets/stop.svg')
+        code, body, hdr = http(base + '/assets/q-g006.svg')
         assert code == 200 and 'image/svg+xml' in hdr['Content-Type']
         for bad in ('/server.py', '/../server.py', '/%2e%2e/server.py', '/assets/../../server.py', '/nope.html'):
             assert http(base + bad)[0] == 404, bad
