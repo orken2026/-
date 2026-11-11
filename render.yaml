@@ -1,7 +1,7 @@
-# Render Blueprint: екі тегін сервис.
+# Render Blueprint: екі сервис.
 #  1) qazaq-pdd-app — Mini App (статикалық сайт, CDN, ешқашан ұйықтамайды)
-#  2) qazaq-pdd-bot — Telegram бот (webhook, мәзір батырмасын өзі баптайды)
-# Жалғыз қолмен енгізілетін мән — BOT_TOKEN.
+#  2) qazaq-pdd-bot — бот + API (сұрақтар мен дұрыс жауаптар осында, клиентке берілмейді)
+# Қолмен енгізілетін құпия мәндер (sync: false): BOT_TOKEN, ADMIN_IDS, SUPPORT, ANTHROPIC_API_KEY.
 services:
   - type: web
     name: qazaq-pdd-app
@@ -12,7 +12,7 @@ services:
   - type: web
     name: qazaq-pdd-bot
     runtime: python
-    plan: free
+    plan: free            # тұрақты жұмыс үшін (күн сұрағы, база) — starter немесе ҚР-дағы VPS (README)
     region: frankfurt
     buildCommand: pip install -r requirements.txt
     startCommand: python server.py
@@ -22,3 +22,13 @@ services:
         sync: false
       - key: MINI_APP_URL
         value: https://qazaq-pdd-app.onrender.com
+      - key: PRICE_STARS
+        value: "50"
+      - key: PLAN_DAYS
+        value: "0"
+      - key: ADMIN_IDS
+        sync: false
+      - key: SUPPORT
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
